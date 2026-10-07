@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TV Pointer</string>
+    <string name="service_label">TV Pointer</string>
+    <string name="service_description">Turns your TV remote into a mouse pointer. The arrow buttons move the pointer and OK taps where it points. TV Pointer reads remote button presses, checks which app is open and whether the on-screen keyboard is showing, finds the button or link under the pointer to press it, and closes the keyboard when you press Back. Nothing is stored, collected or shared, and TV Pointer never connects to the internet.</string>
+
+    <string name="title">TV Pointer</string>
+    <string name="subtitle">Use your remote as a mouse in browsers and other apps.</string>
+    <string name="status_on">Pointer service is on.</string>
+    <string name="status_off">Pointer service is off. Turn it on to start using the pointer.</string>
+    <string name="status_stopped">Pointer service is turned on, but the TV has stopped it. Turn TV Pointer off and on again in Accessibility settings. On TCL TVs, also allow TV Pointer to start automatically in the TCL Guard app.</string>
+    <string name="disclosure">To work, TV Pointer uses Android\'s Accessibility Service. It reads remote button presses, checks which app is open and whether the on-screen keyboard is showing, draws the pointer, finds the button or link under the pointer to press it, and closes the keyboard when you press Back. Nothing is stored, collected or shared, and TV Pointer never connects to the internet. Android will warn that TV Pointer can collect text you type: that is because it reads remote button presses. Selecting the button below means you agree to this; then turn on \"TV Pointer\" in Accessibility settings.</string>
+    <string name="open_accessibility">Agree and open Accessibility settings</string>
+    <string name="accessibility_missing">This TV did not open Accessibility settings. Open Settings → System (or Device Preferences) → Accessibility and turn on TV Pointer.</string>
+
+    <string name="how_to">How to use: arrows move the pointer (hold to speed up). OK taps; hold OK for a long press. Push the pointer against the screen edge to scroll. Press the toggle button to switch the pointer off or on in the current app.</string>
+
+    <string name="toggle_key">Toggle button: %1$s</string>
+    <string name="toggle_key_waiting">Press the remote button you want to use…</string>
+    <string name="speed">Pointer speed: %1$s</string>
+    <string name="size">Pointer size: %1$s</string>
+    <string name="level_low">Slow</string>
+    <string name="level_mid">Normal</string>
+    <string name="level_high">Fast</string>
+    <string name="size_low">Small</string>
+    <string name="size_mid">Normal</string>
+    <string name="size_high">Large</string>
+    <string name="all_apps">Use the pointer in all apps</string>
+    <string name="precise_on">Precise taps: On</string>
+    <string name="precise_off">Precise taps: Off</string>
+    <string name="precise_connecting">Precise taps: on the TV, choose \"Always allow\" and OK…</string>
+    <string name="precise_failed">Couldn\'t turn on precise taps. In Developer options, turn on USB debugging and network debugging, then try again.</string>
+    <string name="precise_hint">Most TVs don\'t let accessibility apps tap the screen, so TV Pointer presses the button under the pointer instead. A few things can\'t be pressed that way (for example Firefox\'s search box). Precise taps fix this by sending real taps through the TV\'s own debugging connection: it needs Developer options → USB/network debugging, and the TV asks once to allow TV Pointer. The connection stays on the TV itself.</string>
+    <string name="apps_header">Apps that use the pointer</string>
+    <string name="apps_hint">Select an app to switch the pointer on or off for it. Open starts the app, including apps (like Firefox) that have no tile on the TV home screen.</string>
+    <string name="open_app">Open</string>
+    <string name="open_failed">This app can\'t be opened from here.</string>
+
+    <string name="toast_on">Pointer on</string>
+    <string name="toast_off">Pointer off</string>
+    <string name="publisher">ESK Tech · eskey.tech</string>
+</resources>
