@@ -51,6 +51,7 @@ final class AdbClient {
     private DataInputStream in;
     private OutputStream out;
     private int nextLocalId = 1;
+    private boolean rejected;
 
     private static final class Message {
         int command, arg0, arg1;
@@ -65,6 +66,11 @@ final class AdbClient {
         return socket != null && socket.isConnected() && !socket.isClosed();
     }
 
+    /** Whether the last connect failed because the TV doesn't (or no longer) trust this app's key. */
+    boolean wasRejected() {
+        return rejected;
+    }
+
     /**
      * Connects and authenticates. If the TV doesn't know this app's key yet and allowPrompt is
      * set, it shows an "Allow debugging?" prompt and this waits up to approvalTimeoutMs for the
@@ -73,6 +79,7 @@ final class AdbClient {
      */
     boolean connect(boolean allowPrompt, int approvalTimeoutMs) throws IOException {
         close();
+        rejected = false;
         socket = new Socket();
         socket.connect(new InetSocketAddress(HOST, PORT), 3000);
         socket.setSoTimeout(5000);
@@ -104,6 +111,7 @@ final class AdbClient {
                 offeredKey = true;
                 socket.setSoTimeout(approvalTimeoutMs);
             } else {
+                rejected = !allowPrompt;
                 close();
                 return false;
             }
