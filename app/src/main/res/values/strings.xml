@@ -30,6 +30,7 @@
     <string name="precise_off">Precise taps: Off</string>
     <string name="precise_connecting">Precise taps: on the TV, choose \"Always allow\" and OK…</string>
     <string name="precise_failed">Couldn\'t turn on precise taps. In Developer options, turn on USB debugging and network debugging, then try again.</string>
+    <string name="precise_ask_again">Precise taps: the TV has stopped allowing TV Pointer. On the TV, choose \"Always allow\" and OK.</string>
     <string name="precise_hint">Most TVs don\'t let accessibility apps tap the screen, so TV Pointer presses the button under the pointer instead. A few things can\'t be pressed that way (for example Firefox\'s search box). Precise taps fix this by sending real taps through the TV\'s own debugging connection: it needs Developer options → USB/network debugging, and the TV asks once to allow TV Pointer. The connection stays on the TV itself.</string>
     <string name="apps_header">Apps that use the pointer</string>
     <string name="apps_hint">Select an app to switch the pointer on or off for it. Open starts the app, including apps (like Firefox) that have no tile on the TV home screen.</string>

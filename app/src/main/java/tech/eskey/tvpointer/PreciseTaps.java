@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -27,7 +28,9 @@ final class PreciseTaps {
     private final Context app;
     private final Handler main = new Handler(Looper.getMainLooper());
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
+    private final ExecutorService prompter = Executors.newSingleThreadExecutor();
     private AdbClient client;
+    private boolean askedAgain; // main thread only
 
     static synchronized PreciseTaps get(Context context) {
         if (instance == null) instance = new PreciseTaps(context.getApplicationContext());
@@ -53,7 +56,33 @@ final class PreciseTaps {
                 : String.format(Locale.ROOT, "input tap %d %d", x, y);
         worker.execute(() -> {
             boolean ok = run(command);
-            main.post(() -> callback.done(ok));
+            boolean rejected = !ok && client != null && client.wasRejected();
+            main.post(() -> {
+                callback.done(ok);
+                if (rejected) askAgain();
+            });
+        });
+    }
+
+    /**
+     * The TV no longer trusts this app's key (Android forgets keys that go unused for a week):
+     * show its "Allow debugging?" prompt again, once per session so declining it is respected.
+     * Uses its own connection and thread, so taps don't wait for the user to answer.
+     */
+    private void askAgain() {
+        if (askedAgain) return;
+        askedAgain = true;
+        Toast.makeText(app, R.string.precise_ask_again, Toast.LENGTH_LONG).show();
+        prompter.execute(() -> {
+            AdbClient prompt = null;
+            try {
+                prompt = new AdbClient(app);
+                boolean ok = prompt.connect(true, 60_000);
+                if (ok) main.post(() -> askedAgain = false); // ask again if it is ever forgotten again
+            } catch (IOException | GeneralSecurityException ignored) {
+            } finally {
+                if (prompt != null) prompt.close();
+            }
         });
     }
 
